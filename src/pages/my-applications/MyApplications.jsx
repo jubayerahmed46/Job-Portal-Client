@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
@@ -29,7 +29,7 @@ function MyApplications() {
       if (result.isConfirmed) {
         axios
           .delete(`http://localhost:5000/my-applications/${id}`)
-          .then((res) => {
+          .then(() => {
             Swal.fire({
               title: "Deleted!",
               text: "Your application has deleted.",

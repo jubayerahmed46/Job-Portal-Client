@@ -7,3 +7,5 @@ export { default as ProtectedRoute } from "../routes/ProtectedRoute";
 export { default as Details } from "../pages/jobDetrails/Details";
 export { default as MyApplications } from "../pages/my-applications/MyApplications";
 export { default as PrivetRoute } from "../routes/PrivetRoute";
+export { default as AddJob } from "../pages/add-job/AddJob";
+export { default as MyJobPosts } from "../pages/my-job-posts/MyJobPosts";
