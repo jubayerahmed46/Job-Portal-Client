@@ -1,8 +1,9 @@
 import React from "react";
 import loginLottieData from "../../assets/login-anim.json";
 import Lottie from "react-lottie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import GoogleSignIn from "./GoogleSignIn";
 
 const defaultOptions = {
   loop: true,
@@ -15,6 +16,7 @@ const defaultOptions = {
 
 function Login() {
   const { loginUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,7 +27,7 @@ function Login() {
     const pass = form.pass.value.trim();
 
     loginUser(email, pass).then((res) => {
-      console.log(res);
+      navigate("/");
     });
   };
   return (
@@ -35,7 +37,9 @@ function Login() {
           <Lottie options={defaultOptions} />
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-md border">
-          <form className="card-body" onSubmit={handleLogin}>
+          <h2 className="text-center text-3xl font-bold ">Login </h2>
+          <GoogleSignIn />
+          <form className="card-body -mt-9" onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import singupLottieData from "../../assets/signup-anim.json";
 import Lottie from "react-lottie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
+import GoogleSignIn from "./GoogleSignIn";
 
 const defaultOptions = {
   loop: true,
@@ -18,6 +19,7 @@ function Signup() {
   const { singupUser } = useAuth();
   const [err, setErr] = useState("");
   const [conErr, setConErr] = useState("");
+  const navigate = useNavigate();
 
   const signupHandler = (e) => {
     e.preventDefault();
@@ -56,7 +58,9 @@ function Signup() {
       .then((user) => {
         return updateProfile(user.user, { displayName });
       })
-      .then(() => {});
+      .then(() => {
+        navigate("/");
+      });
   };
   return (
     <div className="hero bg-base-100 min-h-screen">
@@ -64,8 +68,10 @@ function Signup() {
         <div className=" md:h-64 md:w-[440px] w-auto h-52 ">
           <Lottie options={defaultOptions} />
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-md border">
-          <form className="card-body" onSubmit={signupHandler}>
+        <div className="card bg-base-100 w-full max-w-sm  shrink-0 shadow-md border">
+          <h2 className="text-center text-3xl font-bold  mt-3">SingUp </h2>
+          <GoogleSignIn />
+          <form className="card-body -mt-10" onSubmit={signupHandler}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
