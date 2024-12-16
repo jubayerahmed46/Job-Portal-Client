@@ -5,7 +5,6 @@ function PrivetRoute({ children }) {
   const { user, loading } = useAuth();
   const location = useLocation();
 
-  console.log("");
   if (loading) {
     return;
   }
