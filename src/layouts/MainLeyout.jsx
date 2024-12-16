@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "../components/common/Nav";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/common/Footer";
+import { Toaster } from "react-hot-toast";
 
 function MainLeyout() {
   return (
@@ -11,6 +12,7 @@ function MainLeyout() {
         <Outlet />
       </div>
       <Footer />
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

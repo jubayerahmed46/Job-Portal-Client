@@ -70,6 +70,7 @@ function AuthProvider({ children }) {
     loginUser,
     singinWithGoogle,
     signOutUser,
+    loading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

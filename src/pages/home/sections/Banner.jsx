@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 function Banner() {
   return (
-    <div className="hero bg-blue-200 md:rounded-full rounded-b-full px-3 border-y-8 border-blue-300/85 shadow-inner min-h-screen">
+    <div className="hero bg-blue-200 rounded-b-[300px] px-3 border-y-8 border-blue-300/85 shadow-inner min-h-screen">
       <div className="hero-content flex-col md:flex-row">
         <div className="flex-1 ">
           <h1 className="text-5xl font-bold">
@@ -17,7 +17,7 @@ function Banner() {
         </div>
         <div className="flex-1">
           <motion.img
-            animate={{ y: [0, 50, 0], x: [0, 10, 0] }}
+            animate={{ y: [0, 50, 0], x: [-10, 10, -10] }}
             transition={{
               duration: 10,
               repeat: Infinity,
@@ -27,7 +27,7 @@ function Banner() {
             alt=""
           />
           <motion.img
-            animate={{ x: [100, 50, 100] }}
+            animate={{ x: [70, 30, 70] }}
             transition={{
               duration: 10,
               repeat: Infinity,

@@ -1,5 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import { MainLeyout, AuthLeyout, Login, Signup, Home } from ".";
+import {
+  MainLeyout,
+  AuthLeyout,
+  Login,
+  Signup,
+  Home,
+  ProtectedRoute,
+  Details,
+  MyApplications,
+  PrivetRoute,
+} from ".";
 
 const router = createBrowserRouter([
   {
@@ -20,15 +30,33 @@ const router = createBrowserRouter([
       },
       {
         path: "my-app",
-        element: <h2>my appp</h2>,
+        element: (
+          <PrivetRoute>
+            <MyApplications />
+          </PrivetRoute>
+        ),
       },
       {
         path: "my-job-post",
         element: <h2>my Job post</h2>,
       },
       {
+        path: "job/details/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/jobs/details/${params.id}`),
+        element: (
+          <PrivetRoute>
+            <Details />
+          </PrivetRoute>
+        ),
+      },
+      {
         path: "auth",
-        element: <AuthLeyout />,
+        element: (
+          <ProtectedRoute>
+            <AuthLeyout />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: "login",

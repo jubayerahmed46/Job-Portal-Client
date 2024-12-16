@@ -64,7 +64,7 @@ function Nav() {
         Add New Job
       </NavLink>
       <NavLink
-        to={"my-app"}
+        to={`my-app`}
         className={({ isActive }) =>
           `${
             isActive
@@ -73,7 +73,7 @@ function Nav() {
           }  px-4 py-1 rounded-md`
         }
       >
-        My App
+        My Applications
       </NavLink>
       <NavLink
         to={"my-job-post"}
