@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import PageLoader from "../loaders/PageLoader";
 
 function MyJobPosts() {
   const { user } = useAuth();
@@ -18,6 +20,10 @@ function MyJobPosts() {
       }
     }
   }, [user]);
+
+  if (!myPost.length) {
+    return <PageLoader />;
+  }
   return (
     <div>
       <div className="text-center my-8 text-3xl font-bold">
@@ -33,9 +39,9 @@ function MyJobPosts() {
               <th>company</th>
               <th>location</th>
               <th>Salary Range</th>
-              <th>Deadline</th>
               <th>Applied</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -47,20 +53,26 @@ function MyJobPosts() {
                 company,
                 salaryRange: { min, max, currency },
                 status,
-                applicationDeadline,
+                applicationCount,
               } = post;
               return (
                 <tr key={_id}>
-                  <th>{i} </th>
+                  <th>{i + 1} </th>
                   <td>{title}</td>
                   <td>{company}</td>
                   <td>{location}</td>
                   <td>
                     {min} - {max} {currency?.toUpperCase() || "BDT"}{" "}
                   </td>
-                  <td>{applicationDeadline}</td>
-                  <td>0</td>
+                  <td>{applicationCount || 0} </td>
                   <td>{status}</td>
+                  <td>
+                    <Link to={`view-applications/${_id}`}>
+                      <button className="p-2 rounded-md bg-amber-300 font-semibold hover:bg-amber-200">
+                        View Applications
+                      </button>
+                    </Link>
+                  </td>
                 </tr>
               );
             })}

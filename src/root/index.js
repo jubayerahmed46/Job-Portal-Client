@@ -9,3 +9,4 @@ export { default as MyApplications } from "../pages/my-applications/MyApplicatio
 export { default as PrivetRoute } from "../routes/PrivetRoute";
 export { default as AddJob } from "../pages/add-job/AddJob";
 export { default as MyJobPosts } from "../pages/my-job-posts/MyJobPosts";
+export { default as ViewApplications } from "../pages/my-job-posts/view-applications/ViewApplications";

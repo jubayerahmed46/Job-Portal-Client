@@ -1,10 +1,16 @@
-import React from "react";
 import Nav from "../components/common/Nav";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/common/Footer";
 import { Toaster } from "react-hot-toast";
+import useAuth from "../hooks/useAuth";
+import WindowLoader from "../pages/loaders/WindowLoader";
 
 function MainLeyout() {
+  const { pageLoader } = useAuth();
+
+  if (pageLoader) {
+    return <WindowLoader />;
+  }
   return (
     <div className="">
       <Nav />

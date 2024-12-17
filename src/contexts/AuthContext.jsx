@@ -16,12 +16,14 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [pageLoader, setPageLoader] = useState(true);
 
   useEffect(() => {
     const unSubs = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
       setLoading(false);
+      setPageLoader(false);
     });
 
     return () => unSubs();
@@ -71,6 +73,7 @@ function AuthProvider({ children }) {
     singinWithGoogle,
     signOutUser,
     loading,
+    pageLoader,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

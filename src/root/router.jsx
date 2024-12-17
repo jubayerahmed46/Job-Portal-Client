@@ -11,6 +11,7 @@ import {
   PrivetRoute,
   AddJob,
   MyJobPosts,
+  ViewApplications,
 } from ".";
 
 const router = createBrowserRouter([
@@ -41,6 +42,16 @@ const router = createBrowserRouter([
             <MyApplications />
           </PrivetRoute>
         ),
+      },
+      {
+        path: "my-job-post/view-applications/:job_id",
+        element: (
+          <PrivetRoute>
+            <ViewApplications />
+          </PrivetRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/job/view-applications/${params.job_id}`),
       },
       {
         path: "my-job-post",

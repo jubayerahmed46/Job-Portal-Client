@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PageLoader from "../../loaders/PageLoader";
 
 function RunningJobs() {
   const [jobs, setJobs] = useState([]);
@@ -11,6 +12,10 @@ function RunningJobs() {
       setJobs(res.data);
     })();
   }, []);
+
+  if (!jobs.length) {
+    return <PageLoader />;
+  }
 
   return (
     <div className="mt-20 mb-10">

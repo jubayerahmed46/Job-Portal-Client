@@ -16,7 +16,7 @@ function ApplicationForm({ jobId }) {
           "http://localhost:5000/applications",
           applicationData
         );
-        console.log(res.data.acknowledged);
+        console.log(res.data);
         if (res.data.acknowledged) {
           reset();
           toast.success("Submission Successfull");

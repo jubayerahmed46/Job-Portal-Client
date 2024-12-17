@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import PageLoader from "../loaders/PageLoader";
 
 function MyApplications() {
   const [applications, setApplications] = useState([]);
@@ -15,7 +16,7 @@ function MyApplications() {
           setApplications(res.data);
         });
     }
-  }, []);
+  }, [user]);
 
   const handleDeleteApp = (id) => {
     Swal.fire({
@@ -43,6 +44,10 @@ function MyApplications() {
       }
     });
   };
+
+  if (!applications.length) {
+    return <PageLoader />;
+  }
   return (
     <div>
       <div className="overflow-x-auto">
