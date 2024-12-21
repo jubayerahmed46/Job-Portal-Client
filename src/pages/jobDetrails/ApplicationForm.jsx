@@ -13,7 +13,7 @@ function ApplicationForm({ jobId }) {
     (async function () {
       try {
         const res = await axios.post(
-          "http://localhost:5000/applications",
+          "https://job-portal-server-blond.vercel.app/applications",
           applicationData
         );
         console.log(res.data);

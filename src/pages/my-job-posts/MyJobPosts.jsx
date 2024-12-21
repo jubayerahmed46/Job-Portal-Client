@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import PageLoader from "../loaders/PageLoader";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 function MyJobPosts() {
   const { user } = useAuth();
   const [myPost, setMyPost] = useState([]);
+  const axiosInstance = useAxiosSecure();
+
   useEffect(() => {
-    if (user?.email) {
+    if (user) {
       try {
-        axios
-          .get(`http://localhost:5000/jobs?email=${user.email}`)
-          .then((res) => {
-            setMyPost(res.data);
-          });
+        axiosInstance.get(`/jobs?email=${user.email}`).then((res) => {
+          setMyPost(res.data);
+        });
       } catch (error) {
         console.log(error);
       }

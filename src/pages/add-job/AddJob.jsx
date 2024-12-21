@@ -54,7 +54,10 @@ function AddJob() {
 
     (async function () {
       try {
-        const res = await axios.post("http://localhost:5000/jobs", jobProps);
+        const res = await axios.post(
+          "https://job-portal-server-blond.vercel.app/jobs",
+          jobProps
+        );
         console.log(res.data);
         if (res.data.acknowledged) {
           toast.success("Job Added Successfully");

@@ -8,7 +8,10 @@ function ViewApplications() {
     const body = { status: e.target.value };
     try {
       axios
-        .patch(`http://localhost:5000/job/applicatons/application/${id}`, body)
+        .patch(
+          `https://job-portal-server-blond.vercel.app/job/applicatons/application/${id}`,
+          body
+        )
         .then((res) => {
           console.log(res.data);
         });

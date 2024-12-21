@@ -59,7 +59,7 @@ function Signup() {
         return updateProfile(user.user, { displayName });
       })
       .then(() => {
-        navigate("/");
+        // navigate("/");
       });
   };
   return (

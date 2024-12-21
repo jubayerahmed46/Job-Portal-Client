@@ -1,4 +1,3 @@
-import React from "react";
 import loginLottieData from "../../assets/login-anim.json";
 import Lottie from "react-lottie";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,7 +25,7 @@ function Login() {
     const email = form.email.value;
     const pass = form.pass.value.trim();
 
-    loginUser(email, pass).then((res) => {
+    loginUser(email, pass).then(() => {
       navigate("/");
     });
   };

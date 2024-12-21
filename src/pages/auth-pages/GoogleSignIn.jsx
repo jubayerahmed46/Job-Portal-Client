@@ -1,4 +1,3 @@
-import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +6,7 @@ function GoogleSignIn() {
   const navigate = useNavigate();
 
   const googleSignHandler = () => {
-    singinWithGoogle().then((res) => {
+    singinWithGoogle().then(() => {
       navigate("/");
     });
   };

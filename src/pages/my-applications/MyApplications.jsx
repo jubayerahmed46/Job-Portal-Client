@@ -3,17 +3,22 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import PageLoader from "../loaders/PageLoader";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 function MyApplications() {
   const [applications, setApplications] = useState([]);
   const { user } = useAuth();
+  const axiosInstance = useAxiosSecure();
 
   useEffect(() => {
     if (user?.email) {
-      axios
-        .get(`http://localhost:5000/my-applications?email=${user?.email}`)
+      axiosInstance
+        .get(`/my-applications?email=${user?.email}`)
         .then((res) => {
           setApplications(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, [user]);
@@ -29,7 +34,9 @@ function MyApplications() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/my-applications/${id}`)
+          .delete(
+            `https://job-portal-server-blond.vercel.app/my-applications/${id}`
+          )
           .then(() => {
             Swal.fire({
               title: "Deleted!",
@@ -46,7 +53,12 @@ function MyApplications() {
   };
 
   if (!applications.length) {
-    return <PageLoader />;
+    return (
+      <div>
+        Application
+        <PageLoader />
+      </div>
+    );
   }
   return (
     <div>

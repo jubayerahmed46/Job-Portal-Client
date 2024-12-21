@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   createUserWithEmailAndPassword,
   getRedirectResult,
@@ -10,6 +11,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.init";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -21,6 +23,33 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const unSubs = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
+
+      if (currentUser?.email) {
+        const payload = {
+          username: currentUser.displayName,
+          email: currentUser.email,
+        };
+        try {
+          axios.post(
+            `https://job-portal-server-blond.vercel.app/jwt`,
+            payload,
+            {
+              withCredentials: true,
+            }
+          );
+        } catch (error) {
+          console.error("Error creating token:", error);
+        }
+      } else {
+        // logout the user if the token is not availible
+        axios.post(
+          "https://job-portal-server-blond.vercel.app/logout",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+      }
       setUser(currentUser);
       setLoading(false);
       setPageLoader(false);
@@ -47,19 +76,19 @@ function AuthProvider({ children }) {
     // await signInWithRedirect(auth, provider);
   };
 
-  // useEffect(() => {
-  //   getRedirectResult(auth)
-  //     .then((result) => {
-  //       if (result) {
-  //         // The signed-in user info
-  //         const user = result.user;
-  //         console.log("User Info:", user);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error during sign-in:", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) {
+          // The signed-in user info
+          const user = result.user;
+          console.log("User Info:", user);
+        }
+      })
+      .catch((error) => {
+        console.error("Error during sign-in:", error);
+      });
+  }, []);
 
   const signOutUser = () => {
     return signOut(auth);
